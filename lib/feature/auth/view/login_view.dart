@@ -44,10 +44,10 @@ class _LoginViewState extends State<LoginView> {
         });
       } catch (e) {
         ///debug
-         debugPrint(e.runtimeType.toString());
-         debugPrint(e.toString());
+        //  debugPrint(e.runtimeType.toString());
+        //  debugPrint(e.toString());
          
-         
+          
         setState(() {
           isLoading = false;
         });

@@ -1,27 +1,37 @@
 import 'package:dio/dio.dart';
 import 'package:hungryapp/core/utils/pref_helper.dart';
-
 class DioClient {
   final Dio _dio = Dio(
     BaseOptions(
       baseUrl: 'https://sonic-zdi0.onrender.com/api',
-      headers: {'Content_Type': 'application/json'},
-      
+      headers: {"Content-Type": 'application/json'},
     ),
   );
+
   DioClient() {
+    // _dio.interceptors.add( 
+    //   LogInterceptor(requestBody: true, responseBody: true),
+    // );
+
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (Options, Handle) {
+        onRequest: (options, handler) async {
+          final token = await PrefHelper.getToken();
+          print(' API Request to: ${options.path}');
+          print(' Token for request: ${token ?? 'null'}');
 
-          final token = PrefHelper.getToken();
-
-            Options.headers['Authorization'] = 'Bearer$token';
-
-          Handle.next(Options);
+          if (token != null && token.isNotEmpty && token != 'guest') {
+            options.headers['Authorization'] = 'Bearer $token';
+            options.headers['Content-Type'] = 'application/json';
+            print('Authorization header added');
+          } else {
+            print('No authorization header added');
+          }
+          return handler.next(options);
         },
       ),
     );
   }
+
   Dio get dio => _dio;
 }

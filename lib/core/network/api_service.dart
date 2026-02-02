@@ -3,45 +3,47 @@ import 'package:hungryapp/core/network/api_exceptions.dart';
 import 'package:hungryapp/core/network/dio_client.dart';
 
 class ApiService {
-  final DioClient dioClient = DioClient();
+  final DioClient _dioClient = DioClient();
 
-  ///get
+  /// CRUD METHODS
+
+  /// get
   Future<dynamic> get(String endPoint) async {
     try {
-      final response = await dioClient.dio.get(endPoint);
+      final response = await _dioClient.dio.get(endPoint);
       return response.data;
-    } on DioError catch (e) {
-      throw ApiExceptions.handleError(e);
+    } on DioException catch (e) {
+      return ApiExceptions.handleError(e);
     }
   }
 
-  ///post
-  Future<dynamic> post(String endPoint, Map<String, dynamic> body) async {
+  /// post
+  Future<dynamic> post(String endPoint, dynamic body) async {
     try {
-      final response = await dioClient.dio.post(endPoint, data: body);
+      final response = await _dioClient.dio.post(endPoint, data: body);
       return response.data;
-    } on DioError catch (e) {
-    throw ApiExceptions.handleError(e);
+    } on DioException catch (e) {
+      return ApiExceptions.handleError(e);
     }
   }
 
-  ///put
-  Future<dynamic> put(String endPoint, Map<String, dynamic> body) async {
+  /// put || update
+  Future<dynamic> put(String endPoint, dynamic body) async {
     try {
-      final response = await dioClient.dio.put(endPoint, data: body);
+      final response = await _dioClient.dio.put(endPoint, data: body);
       return response.data;
-    } on DioError catch (e) {
-      throw ApiExceptions.handleError(e);
+    } on DioException catch (e) {
+      return ApiExceptions.handleError(e);
     }
   }
 
-  ///Delete
-  Future<dynamic> delete(String endPoint, Map<String, dynamic> body) async {
+  /// delete
+  Future<dynamic> delete(String endPoint, dynamic body) async {
     try {
-      final response = await dioClient.dio.delete(endPoint, data: body);
+      final response = await _dioClient.dio.delete(endPoint, data: body);
       return response.data;
-    } on DioError catch (e) {
-      throw ApiExceptions.handleError(e);
+    } on DioException catch (e) {
+      return ApiExceptions.handleError(e);
     }
   }
 }

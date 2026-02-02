@@ -3,32 +3,52 @@ import 'package:hungryapp/core/network/api_error.dart';
 
 class ApiExceptions {
   static ApiError handleError(DioException error) {
-    final  StatusCode = error.response?.statusCode;
+    final statusCode = error.response?.statusCode;
     final data = error.response?.data;
 
-      
-      if (data is Map<String, dynamic> && data["message"] != null) {
-        return ApiError(
-          message: data["message"] ,
-          statusCode: StatusCode ,
-        );
+    if (statusCode != null) {
+      if (data is Map<String, dynamic> && data['message'] != null) {
+        return ApiError(message: data['message'], statusCode: statusCode);
       }
-    
+    }
+
+    // if(statusCode == 302) {
+    //   throw ApiError(message: 'This Email Already Taken');
+    // }
+
+  
+    print(error);
+    print(data);
+
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        return ApiError(message: 'Connection timeout');
-
+        return ApiError(message: "Connection timeout. Please check your internet connection");
       case DioExceptionType.sendTimeout:
-        return ApiError(message: 'Request timeout');
-
+        return ApiError(message: "Request timeout. Please try again");
       case DioExceptionType.receiveTimeout:
-        return ApiError(message: 'Server not responding');
-
-      case DioExceptionType.connectionError:
-        return ApiError(message: 'No internet connection');
-
+        return ApiError(message: "Response timeout. Please try again");
       default:
-        return ApiError(message: 'Something wrong');
+        return ApiError(message: "An unexpected error occurred. Please try again");
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if(statusCode == 302) {
+//   return ApiError(message: 'The Email is Already Taken');
+// }
+
+// print('Error response: ${error.response?.data}');
+// print('Status code: $statusCode');

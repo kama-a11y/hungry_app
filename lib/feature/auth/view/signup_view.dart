@@ -35,7 +35,7 @@ class _SignupViewState extends State<SignupView> {
         isLoading = true;
       });
       try {
-        final user = await authRepo.Signup(
+        final user = await authRepo.signup(
           nameController.text.trim(),
           emailController.text.trim(),
           passwordController.text.trim(),
