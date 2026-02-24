@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hungryapp/core/constants/app_color.dart';
 
 class ProfileField extends StatelessWidget {
   const ProfileField({super.key, required this.controller, required this.labelName, this.textInputType, required this.color});
