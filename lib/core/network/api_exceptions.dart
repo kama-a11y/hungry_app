@@ -11,15 +11,15 @@ class ApiExceptions {
         return ApiError(message: data['message'], statusCode: statusCode);
       }
     }
+    print(error);
+     print("data is : $data");
 
-    // if(statusCode == 302) {
-    //   throw ApiError(message: 'This Email Already Taken');
-    // }
+      if(statusCode == 302) {
+        throw ApiError(message: 'This Email Already Taken');
+      }
 
   
-    print(error);
-    print(data);
-
+  
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
         return ApiError(message: "Connection timeout. Please check your internet connection");

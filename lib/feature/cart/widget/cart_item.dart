@@ -48,7 +48,7 @@ final String description;
             
                   ],
                 ),
-                Gap(40),
+               Spacer(),
                 //second column
                 Column(
                   children: [

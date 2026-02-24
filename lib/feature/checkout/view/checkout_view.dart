@@ -52,7 +52,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   onTap: () => setState(()=> selectedMethod = 'cash' ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
                   shape:RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(16)
+                    borderRadius: BorderRadius.circular(16)
                   ),
                   leading:Image.asset('assets/checkout/dollar Background Removed 1.png',width: 70,) ,
                   title: CustomText(text: 'Cash on Delivery', size: 22,color: Colors.white),
@@ -84,7 +84,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   onTap: () => setState(()=> selectedMethod = 'visa' ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 13),
                   shape:RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(16)
+                    borderRadius: BorderRadius.circular(16)
                   ),
                   leading:Image.asset('assets/checkout/visa.png',width: 70,) ,
                   title: Column(
@@ -107,7 +107,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 children: [
                   Checkbox(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(4)
+                      borderRadius: BorderRadius.circular(4)
                     ),
                     activeColor: Color(0xffEF2A39),
                     value: true,

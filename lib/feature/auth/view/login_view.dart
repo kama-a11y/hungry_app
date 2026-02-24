@@ -8,6 +8,7 @@ import 'package:hungryapp/feature/auth/data/auth_repo.dart';
 import 'package:hungryapp/feature/auth/view/signup_view.dart';
 import 'package:hungryapp/feature/auth/widgets/custom_auth_button.dart';
 import 'package:hungryapp/feature/root.dart';
+import 'package:hungryapp/shared/custom_snack_bar.dart';
 import 'package:hungryapp/shared/custom_text.dart';
 import 'package:hungryapp/shared/custom_text_field.dart';
 
@@ -37,13 +38,13 @@ class _LoginViewState extends State<LoginView> {
           passwordController.text.trim(),
         );
         if (user != null) {
-          Navigator.push(context, MaterialPageRoute(builder: (c) => Root()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (c) => Root()));
         }
         setState(() {
           isLoading = false;
         });
       } catch (e) {
-        ///debug
+        // ///debug
         //  debugPrint(e.runtimeType.toString());
         //  debugPrint(e.toString());
          
@@ -55,108 +56,111 @@ class _LoginViewState extends State<LoginView> {
         if (e is ApiError) {
           errorMsg = e.message;
         }
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(errorMsg)));
+        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg));
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  Spacer(),
-                  SvgPicture.asset(
-                    'assets/logo/Hungry_.svg',
-                    color: AppColor.primaryColor,
-                    width: 294,
-                  ),
-                  Gap(10),
-                  CustomText(
-                    text: "Welcome Back, Discover The Fast Food",
-                    weight: FontWeight.bold,
-                    size: 16,
-                    color: Colors.grey.shade700,
-                  ),
-                  Gap(90),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      top: 60,
-                      bottom: 150,
-                    ),
-                    decoration: BoxDecoration(
+    return PopScope(
+      canPop: false,
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Spacer(),
+                    SvgPicture.asset(
+                      'assets/logo/Hungry_.svg',
                       color: AppColor.primaryColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                      width: 294,
+                    ),
+                    Gap(10),
+                    CustomText(
+                      text: "Welcome Back, Discover The Fast Food",
+                      weight: FontWeight.bold,
+                      size: 16,
+                      color: Colors.grey.shade700,
+                    ),
+                    Gap(90),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        top: 60,
+                        bottom: 150,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColor.primaryColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          CustomTextField(
+                            controller: emailController,
+                            hint: 'Email Adress',
+                            isPassword: false,
+                          ),
+                          Gap(20),
+                          CustomTextField(
+                            controller: passwordController,
+                            hint: 'Password',
+                            isPassword: true,
+                          ),
+      
+                          Gap(30),
+      
+                          isLoading
+                              ? CupertinoActivityIndicator(color: Colors.white)
+                              : CustomAuthButton(
+                                  ontap: login,
+                                  text: 'Login',
+                                  textColor: Colors.white,
+                                  color: AppColor.primaryColor,
+                                ),
+                          Gap(20),
+                          CustomAuthButton(
+                            ontap: () {
+                        //Navigator.pop(context);
+      
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (c) => SignupView()),
+                              );
+                            },
+                            text: 'Create Account ?',
+                          ),
+                          Gap(20),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (_) => Root()),
+                                (route) => false,
+                              );
+                            },
+                            child: CustomText(
+                              text: 'Continue as a guest ?',
+                              size: 14,
+                              weight: FontWeight.bold,
+                              color: Colors.amber,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                          controller: emailController,
-                          hint: 'Email Adress',
-                          isPassword: false,
-                        ),
-                        Gap(20),
-                        CustomTextField(
-                          controller: passwordController,
-                          hint: 'Password',
-                          isPassword: true,
-                        ),
-
-                        Gap(30),
-
-                        isLoading
-                            ? CupertinoActivityIndicator(color: Colors.white)
-                            : CustomAuthButton(
-                                ontap: login,
-                                text: 'Login',
-                                textColor: Colors.white,
-                                color: AppColor.primaryColor,
-                              ),
-                        Gap(20),
-                        CustomAuthButton(
-                          ontap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (c) => SignupView()),
-                            );
-                          },
-                          text: 'Create Account ?',
-                        ),
-                        Gap(20),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (_) => Root()),
-                              (route) => false,
-                            );
-                          },
-                          child: CustomText(
-                            text: 'Continue as a guest ?',
-                            size: 14,
-                            weight: FontWeight.bold,
-                            color: Colors.amber,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

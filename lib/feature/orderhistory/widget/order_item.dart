@@ -62,7 +62,10 @@ class OrderItem extends StatelessWidget {
                 ),
               ),
               Gap(10),
-              CustomButton(text: 'Order Again', ontap: (){}, width: 350, height: 62,color: Colors.grey.shade500,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: CustomButton(text: 'Order Again', ontap: (){}, width: double.infinity, height: 62,color: Colors.grey.shade500,),
+              ),
               Gap(10)
             ],
           ),

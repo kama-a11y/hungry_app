@@ -18,8 +18,10 @@ class _HomeViewState extends State<HomeView> {
 
   int selectedCategory = 0;
   bool isclicked = false;
+  
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
@@ -36,7 +38,7 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Gap(25),
                      UserHeader(),  
-                    Gap(30),                     
+                    Spacer(),                     
                     SearchField(),   
                   ],
                ),
@@ -64,23 +66,51 @@ class _HomeViewState extends State<HomeView> {
             /// grid view
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: 6,
-                  (context,index){
-                    return  GestureDetector(
-                      onTap: (){
-                        Navigator.push( context , MaterialPageRoute( builder : (context) => ProductDetailsView()));
-                      },
-                      child: CardItem(image:  'assets/test/burger.png', text: 'Cheeseburger', desc: 'Wendy\'s Burger', rate: '4.9'));
-                  }
-                ),
-                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: .73,
+              sliver: SliverLayoutBuilder(
+  builder: (context, constraints) {
+    final width = constraints.crossAxisExtent;
 
-                  )
-                 ),
+    // حساب عدد الأعمدة تلقائي
+    final crossAxisCount = width ~/ 180;
+    final itemWidth = width / crossAxisCount;
+
+    // ارتفاع تقريبي للكارد (صورة + نص)
+    final itemHeight = itemWidth +100;
+
+    final aspectRatio = itemWidth / itemHeight;
+
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        childCount: 6,
+        (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ProductDetailsView(),
+                ),
+              );
+            },
+            child: CardItem(
+              image: 'assets/test/burger.png',
+              text: 'Cheeseburger',
+              desc: "Wendy's Burger",
+              rate: '4.9',
+            ),
+          );
+        },
+      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        childAspectRatio: aspectRatio,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+      ),
+    );
+  },
+),
+
               )
 
 

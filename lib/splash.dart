@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hungryapp/core/constants/app_color.dart';
+import 'package:hungryapp/core/utils/pref_helper.dart';
 import 'package:hungryapp/feature/auth/view/login_view.dart';
+import 'package:hungryapp/feature/root.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -13,7 +15,6 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash>
     with SingleTickerProviderStateMixin {
-
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _logoSlide;
@@ -51,16 +52,45 @@ class _SplashState extends State<Splash>
 
     _controller.forward();
 
+    /// بعد الأنيميشن نعمل check auth
     Future.delayed(
       const Duration(seconds: 2),
-      () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const LoginView()),
-        );
-      },
+      checkAuth,
     );
   }
+
+  /// ================= AUTH LOGIC =================
+
+  Future<void> checkAuth() async {
+    final token = await PrefHelper.getToken();
+
+    if (!mounted) return;
+
+    if (token == null) {
+      goToLogin();
+    } else {
+      goToHome();
+    }
+  }
+
+
+  /// ================= NAVIGATION =================
+
+  void goToLogin() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginView()),
+    );
+  }
+
+  void goToHome() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const Root()),
+    );
+  }
+
+  /// ================= UI =================
 
   @override
   void dispose() {
@@ -77,7 +107,7 @@ class _SplashState extends State<Splash>
           children: [
             const Gap(300),
 
-            /// LOGO ANIMATION
+            /// LOGO
             FadeTransition(
               opacity: _fadeAnimation,
               child: SlideTransition(
@@ -90,7 +120,7 @@ class _SplashState extends State<Splash>
 
             const Spacer(),
 
-            /// IMAGE ANIMATION
+            /// IMAGE
             FadeTransition(
               opacity: _fadeAnimation,
               child: SlideTransition(
