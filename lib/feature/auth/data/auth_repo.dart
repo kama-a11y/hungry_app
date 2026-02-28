@@ -129,8 +129,6 @@ Future<UserModel> updateProfileData({required String name , String? imagePath,re
         final msg = Response['message'];
         final code = Response['code'];
         final coder = int.tryParse(code);
-        final data = Response['data'];
-
         if (coder != 200 && coder != 201) {
           throw ApiError(message: msg ?? 'Unknown error');
         }}

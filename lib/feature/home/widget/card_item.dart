@@ -17,10 +17,10 @@ class CardItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(image,width: 170,),
+                    Image.network(image,width: 170,),
                     Gap(10),
                     CustomText(text: text, size: 17 ,weight: FontWeight.bold,),
-                    CustomText(text: desc, size: 18 ,weight: FontWeight.w700,color: Color(0xff544949),),
+                    CustomText(text: desc, size: 14 ,weight: FontWeight.w700,color: Color(0xff544949),),
                     CustomText(text: '⭐ $rate ', size: 17 ,weight: FontWeight.bold,),
 
                   ],

@@ -36,20 +36,16 @@ class _ProfileViewState extends State<ProfileView> {
   bool isLoadingLogout = false;
   AuthRepo authRepo = AuthRepo();
 
-  // Future<void> autoLogin() async {
-  //   final user = await authRepo.autoLogin();
-  //   setState(() => isGuest = authRepo.isGuest);
-  //   if (user != null) setState(() => userModel = user);
-  // }
-
   /// get profile
   Future<void> getProfileData() async {
     try {
       final user = await authRepo.getProfileData();
+      if (!mounted) return;
       setState(() {
         userModel = user;
       });
     } catch (e) {
+      if (!mounted) return;
       String errorMsg = 'Error in Profile';
       if (e is ApiError) {
         errorMsg = e.message;
@@ -69,13 +65,16 @@ class _ProfileViewState extends State<ProfileView> {
         imagePath: selectedImage,
         visa: _visa.text.trim(),
       );
+      if (!mounted) return;
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(CustomSnackBar('Profile updated Successfully'));
       setState(() => isLoadingUpdate = false);
+      setState(() => selectedImage = null);
       setState(() => userModel = user);
       await getProfileData();
     } catch (e) {
+      if (!mounted) return;
       setState(() => isLoadingUpdate = false);
       String errorMsg = 'Failed to update profile';
       if (e is ApiError) errorMsg = e.message;
@@ -89,9 +88,12 @@ class _ProfileViewState extends State<ProfileView> {
       source: ImageSource.gallery,
     );
     if (pickedImage != null) {
+      if (!mounted) return;
+      
       setState(() {
         selectedImage = pickedImage.path;
       });
+      await updateProfileData();
     }
   }
 

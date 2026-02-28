@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({super.key});
-
+  const SearchField({super.key, required this.onChanged});
+final Function(String) onChanged; 
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -11,6 +11,7 @@ class SearchField extends StatelessWidget {
       shadowColor: Colors.grey,
       borderRadius: BorderRadius.circular(10),
       child: TextField(
+        onChanged: onChanged,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

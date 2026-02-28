@@ -16,10 +16,12 @@ final ValueChanged<double> onChanged;
 class _SpicySliderState extends State<SpicySlider> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Row(
+      mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset('assets/product/pngwing 12.png',height: 300,),
-              Gap(10),
+              Image.asset('assets/product/pngwing 12.png',width:screenWidth * 0.45,),
+              Spacer(),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,

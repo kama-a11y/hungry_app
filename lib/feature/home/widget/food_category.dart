@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:hungryapp/core/constants/app_color.dart';
+import 'package:hungryapp/feature/home/data/category_model.dart';
 import 'package:hungryapp/shared/custom_text.dart';
 
 // ignore: must_be_immutable
 class FoodCategory extends StatefulWidget {
    FoodCategory({super.key, required this.category, required this.selectedCategory});
- List<dynamic> category;
+ List<CategoryModel> category;
  int selectedCategory;
   @override
   State<FoodCategory> createState() => _FoodCategoryState();
@@ -41,7 +42,7 @@ class _FoodCategoryState extends State<FoodCategory> {
                             
                             child: Center(
                               child: CustomText(
-                                text: widget.category[index],
+                                text: widget.category[index].name,
                                 size: 16,
                                 weight: FontWeight.bold,
                                 color: widget.selectedCategory == index
