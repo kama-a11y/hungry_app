@@ -50,7 +50,7 @@ class _ProfileViewState extends State<ProfileView> {
       if (e is ApiError) {
         errorMsg = e.message;
       }
-      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg));
+      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg,false));
     }
   }
 
@@ -68,7 +68,7 @@ class _ProfileViewState extends State<ProfileView> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(CustomSnackBar('Profile updated Successfully'));
+      ).showSnackBar(CustomSnackBar('Profile updated Successfully',true));
       setState(() => isLoadingUpdate = false);
       setState(() => selectedImage = null);
       setState(() => userModel = user);

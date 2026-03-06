@@ -56,7 +56,7 @@ class _LoginViewState extends State<LoginView> {
         if (e is ApiError) {
           errorMsg = e.message;
         }
-        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg));
+        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg,false));
       }
     }
   }

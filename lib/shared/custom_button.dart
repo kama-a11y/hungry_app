@@ -6,7 +6,7 @@ import 'package:hungryapp/shared/custom_text.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.text, required this.ontap, required this.width, required this.height, this.color, this.textColor});
   final String text;
-  final Function() ontap;
+  final Function()? ontap;
   final double width;
   final double height;
   final Color? textColor;

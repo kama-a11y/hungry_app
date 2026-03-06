@@ -80,7 +80,7 @@ class AuthRepo {
           throw ApiError(message: msg ?? 'Unknown error');
         }
 
-        /// condtion assement
+        
         final user = UserModel.fromJson(data);
         if (user.token != null) {
           await PrefHelper.saveToken(user.token!);

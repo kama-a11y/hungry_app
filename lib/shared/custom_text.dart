@@ -12,6 +12,7 @@ class CustomText extends StatelessWidget {
     return Text(text,
             overflow: TextOverflow.ellipsis ,
              maxLines:3 ,
+             softWrap: true,
              textScaler:TextScaler.linear(1.0) ,
             style: TextStyle(
               fontSize: size,

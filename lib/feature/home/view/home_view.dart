@@ -44,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
       if (e is ApiError) {
         errorMsg = e.message;
       }
-      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg));
+      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg,false));
     }
   }
   ///search product
@@ -74,7 +74,7 @@ class _HomeViewState extends State<HomeView> {
       if (e is ApiError) {
         errorMsg = e.message;
       }
-      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg));
+      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg,false));
     }
   }
 @override
@@ -152,7 +152,7 @@ class _HomeViewState extends State<HomeView> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => ProductDetailsView(),
+                                  builder: (_) => ProductDetailsView(id: index,),
                                 ),
                               );
                             },

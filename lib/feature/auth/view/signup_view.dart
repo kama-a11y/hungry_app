@@ -57,7 +57,7 @@ class _SignupViewState extends State<SignupView> {
             errorMsg = e.message;
           });
         }
-        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg));
+        ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg,false));
       }
     }
   }

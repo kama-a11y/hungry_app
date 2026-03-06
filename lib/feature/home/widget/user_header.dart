@@ -38,7 +38,7 @@ class _UserHeaderState extends State<UserHeader> {
       if (e is ApiError) {
         errorMsg = e.message;
       }
-      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg));
+      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(errorMsg,false));
     }
   }
 @override
