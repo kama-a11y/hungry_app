@@ -93,7 +93,7 @@ class _HomeViewState extends State<HomeView> {
         child: Scaffold(
           body: Skeletonizer(
             enabled: products == null,
-            containersColor: AppColor.primaryColor.withOpacity(0.3),
+            containersColor: AppColor.primaryColor,
             child: CustomScrollView(
               physics: BouncingScrollPhysics(),
               slivers: [

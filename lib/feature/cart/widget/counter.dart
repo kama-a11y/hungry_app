@@ -4,15 +4,16 @@ import 'package:gap/gap.dart';
 import 'package:hungryapp/core/constants/app_color.dart';
 import 'package:hungryapp/shared/custom_text.dart';
 
+// ignore: must_be_immutable
 class Counter extends StatefulWidget {
-  const Counter({super.key});
-
+   Counter({super.key, required this.quantity});
+ int quantity;
   @override
   State<Counter> createState() => _CounterState();
 }
 
 class _CounterState extends State<Counter> {
- int count = 0;
+ //int count = widget.quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,10 @@ class _CounterState extends State<Counter> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              if(count > 0){
-                                count--;
+                              if(widget.quantity > 0){
+                                widget.quantity--;
                               }else{
-                                count = count;
+                                widget.quantity = widget.quantity;
                               }
                               
                             });
@@ -41,12 +42,12 @@ class _CounterState extends State<Counter> {
                           ),
                         ),
                         Gap(20),
-                        CustomText(text: '$count', size: 23),
+                        CustomText(text: '${widget.quantity}', size: 23),
                         Gap(20),
                         GestureDetector(
                           onTap:(){
                             setState(() {
-                              count++;
+                              widget.quantity++;
                             });
                           },
                           child: Container(
