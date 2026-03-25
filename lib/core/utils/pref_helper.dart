@@ -19,4 +19,22 @@ static Future<String?> getToken()async{
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(_tokenKey);
   }
+
+   // ================= GUEST =================
+
+  static Future<void> setGuestMode(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isGuest', value);
+  }
+
+  static Future<bool> isGuestMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isGuest') ?? false;
+  }
+
+  static Future<void> clearGuestMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('isGuest');
+  }
+  
 }

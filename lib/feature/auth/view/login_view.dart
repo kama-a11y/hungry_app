@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hungryapp/core/constants/app_color.dart';
 import 'package:hungryapp/core/network/api_error.dart';
+import 'package:hungryapp/core/utils/pref_helper.dart';
 import 'package:hungryapp/feature/auth/data/auth_repo.dart';
 import 'package:hungryapp/feature/auth/view/signup_view.dart';
 import 'package:hungryapp/feature/auth/widgets/custom_auth_button.dart';
@@ -142,7 +143,9 @@ class _LoginViewState extends State<LoginView> {
                           ),
                           Gap(20),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async{
+                              await PrefHelper.clearToken(); 
+                              await PrefHelper.setGuestMode(true);
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(builder: (_) => Root()),

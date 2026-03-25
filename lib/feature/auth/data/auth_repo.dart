@@ -41,6 +41,7 @@ class AuthRepo {
 
         if (user.token != null) {
           await PrefHelper.saveToken(user.token!);
+          await PrefHelper.setGuestMode(false);
           print('💾 Token saved to storage: ${user.token}');
         } else {
           print('⚠️ No token received from server!');
@@ -84,6 +85,7 @@ class AuthRepo {
         final user = UserModel.fromJson(data);
         if (user.token != null) {
           await PrefHelper.saveToken(user.token!);
+          await PrefHelper.setGuestMode(false);
         }
         isGuest = false;
         return user;  

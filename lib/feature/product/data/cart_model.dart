@@ -5,14 +5,12 @@ class CartModel {
 
   CartModel({required this.items});
 
-  // ✅ تحويل لـ JSON للإرسال
   Map<String, dynamic> toJson() {
     return {
       'items': items.map((item) => item.toJson()).toList(),
     };
   }
 
-  // ✅ تحويل من JSON
   factory CartModel.fromJson(Map<String, dynamic> json) {
     return CartModel(
       items: (json['items'] as List)

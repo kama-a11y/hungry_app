@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hungryapp/core/constants/app_color.dart';
 import 'package:hungryapp/shared/custom_button.dart';
 import 'package:hungryapp/shared/custom_text.dart';
 
@@ -37,7 +38,7 @@ class OrderItem extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                     Image.asset(image,height: 120),
+                     Image.network(image,height: 120),
                      
                      Spacer(),
                      
@@ -50,7 +51,7 @@ class OrderItem extends StatelessWidget {
                                 
                                 CustomText(text:title, size: 18, weight: FontWeight.bold,),
                                 Gap(5),
-                                CustomText(text:quantity, size: 16, weight: FontWeight.w700,),
+                                CustomText(text:quantity, size: 14, weight: FontWeight.w700,),
                                 Gap(5),
                                 CustomText(text:price, size: 16, weight: FontWeight.w700,),
                                           
@@ -64,12 +65,12 @@ class OrderItem extends StatelessWidget {
               Gap(10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: CustomButton(text: 'Order Again', ontap: (){}, width: double.infinity, height: 62,color: Colors.grey.shade500,),
+                child: CustomButton(text: 'Order Again', ontap: (){}, width: double.infinity, height: 62,color: AppColor.primaryColor.withOpacity(.4),),
               ),
               Gap(10)
             ],
           ),
-        ),
+        ),  
       );
     //''
 

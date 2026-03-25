@@ -48,7 +48,7 @@ class ProductRepo {
     }
   }
 ///add to cart
-  Future<Map<String, dynamic>?> addToCart({
+  Future<Map<String, dynamic  >?> addToCart({
     required int productId,
     required int quantity,
     double? spicy,
