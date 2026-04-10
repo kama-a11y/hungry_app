@@ -52,14 +52,13 @@ class _SplashState extends State<Splash>
 
     _controller.forward();
 
-    /// بعد الأنيميشن نعمل check auth
     Future.delayed(
       const Duration(seconds: 2),
       checkAuth,
     );
   }
 
-  /// ================= AUTH LOGIC =================
+  // AUTH LOGIC 
 
   Future<void> checkAuth() async {
     final token = await PrefHelper.getToken();
@@ -74,7 +73,7 @@ class _SplashState extends State<Splash>
   }
 
 
-  /// ================= NAVIGATION =================
+  ///  NAVIGATION 
 
   void goToLogin() {
     Navigator.pushReplacement(
@@ -90,8 +89,7 @@ class _SplashState extends State<Splash>
     );
   }
 
-  /// ================= UI =================
-
+  
   @override
   void dispose() {
     _controller.dispose();

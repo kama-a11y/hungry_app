@@ -132,11 +132,9 @@ class _HomeViewState extends State<HomeView> {
                     builder: (context, constraints) {
                       final width = constraints.crossAxisExtent;
                   
-                      // حساب عدد الأعمدة تلقائي
                       final crossAxisCount = width ~/ 180;
                       final itemWidth = width / crossAxisCount;
-                  
-                      // ارتفاع تقريبي للكارد (صورة + نص)
+                
                       final itemHeight = itemWidth + 140;
                   
                       final aspectRatio = itemWidth / itemHeight;
